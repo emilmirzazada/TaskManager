@@ -1,0 +1,59 @@
+﻿@page
+@using TaskManager.WebUI.Common;
+@model TaskManager.WebUI.Issues.CreateModel
+@{
+    ViewData["Title"] = "Add issue";
+}
+
+<div class="breadcrumbs">
+    <a asp-page="../Index">Home</a> >
+    <a asp-page="Index">Issues</a> >
+    <span>Add issue</span>
+</div>
+
+<h1>Add issue</h1>
+
+<form asp-page="Create" method="post">
+    <div>
+        <label asp-for="IssueDetail.Issue.Name" class="control-label"></label>
+        <input name="Name" asp-for="IssueDetail.Issue.Name" class="form-control" value="@Model.IssueDetail.Issue.Name" />
+        <span asp-validation-for="IssueDetail.Issue.Name" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="IssueDetail.Issue.Description" class="control-label"></label>
+        <input name="Description" asp-for="IssueDetail.Issue.Description" class="form-control" value="@Model.IssueDetail.Issue.Description" />
+    </div>
+    @*<div>
+            <label asp-for="Issue.AssigneeId" class="control-label"></label>
+            <select name="AssigneeId" asp-for="Issue.AssigneeId" asp-items="@Model.Issue.Employees.ToSelectList(Model.Issue.AssigneeId)"></select>
+        </div>*@
+    <div>
+        <label  class="control-label">Assignees</label>
+        <select name="AssignedEmployeeIds" asp-for="IssueDetail.Issue.IssueAssignees" asp-items="@Model.IssueDetail.Employees.ToSelectList(Model.IssueDetail.Issue.IssueAssignees)" class="selectpicker" multiple data-live-search="true">
+        </select>
+    </div>
+    <div>
+        <label asp-for="IssueDetail.Issue.Priority" class="control-label"></label>
+        <select name="Priority" asp-for="IssueDetail.Issue.Priority" asp-items="@Model.IssueDetail.IssuePriorityLevels.ToSelectList(Model.IssueDetail.Issue.Priority)"></select>
+    </div>
+    <div>
+        <label asp-for="IssueDetail.Issue.Status" class="control-label"></label>
+        <select name="Status" asp-for="IssueDetail.Issue.Status" asp-items="@Model.IssueDetail.IssueStatuses.ToSelectList(Model.IssueDetail.Issue.Status)"></select>
+    </div>
+    <input class="btn" type="submit" value="Create" />
+</form>
+
+
+@section Scripts {
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+
+
+    <script>
+        $('select').selectpicker();
+    </script>
+}
