@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using TaskManager.Application.Common.Interfaces;
 using TaskManager.Application.Common.Models;
+using TaskManager.Domain.Entities;
 
 namespace TaskManager.Application.Issues.Queries.GetIssueDetail
 {
@@ -33,6 +34,10 @@ namespace TaskManager.Application.Issues.Queries.GetIssueDetail
                 var vm = new IssueDetailVm
                 {
                     Employees = employees,
+                    Issue = new Issue {
+                        Name = string.Empty,
+                        Description = string.Empty
+                    }
                 };
 
                 return vm;
